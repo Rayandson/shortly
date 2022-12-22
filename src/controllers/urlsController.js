@@ -7,7 +7,6 @@ export async function create(req, res) {
     const shortUrl = nanoid(8);
 
     const userId = res.locals.userId;
-    console.log(userId)
     
     try {
 

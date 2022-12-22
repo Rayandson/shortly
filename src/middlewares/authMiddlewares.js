@@ -20,11 +20,9 @@ export async function validateSignUp ( req, res, next) {
                 return res.status(409).send("O usuário já existe!")
             }
 
-            console.log("Passou")
             next();
 
     } catch(err) {
-        console.log("Parou aqui")
         res.status(500).send(err.message);
     }
 }
@@ -60,7 +58,6 @@ export async function validateSignIn(req, res, next) {
         next();
 
     } catch(err) {
-        console.log("parou aqui")
         res.status(500).send(err.message);
     }
 }

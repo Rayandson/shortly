@@ -19,5 +19,5 @@ export async function ranking(req, res) {
 
     const ranking = await connectionDB.query(`SELECT users.id, users.name, COUNT(urls.id) AS "linksCount", COALESCE(SUM(urls."visitCount"), 0) AS "visitCount" FROM users LEFT JOIN urls ON users.id = urls."userId" GROUP BY users.id ORDER BY "visitCount" DESC, "linksCount" DESC LIMIT 10`)
 
-    res.status(200).send(ranking.rows)
+    res.status(200).send(ranking.rows) 
 }
