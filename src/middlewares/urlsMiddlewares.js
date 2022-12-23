@@ -8,7 +8,7 @@ export function validateUrlsSchema(req, res, next) {
 
     if (error) {
       const errors = error.details.map((detail) => detail.message);
-      return res.status(400).send({ errors });
+      return res.status(422).send({ errors });
     }
 
     next();
@@ -19,12 +19,12 @@ export async function validateShortUrl(req, res, next) {
     const { shortUrl } = req.params;
 
     const urlExists = await connectionDB.query(`SELECT * FROM urls WHERE "shortUrl" = $1;`, [shortUrl])
-    await connectionDB.query('UPDATE urls SET "visitCount"=$1 WHERE id = $2;', [urlExists.rows[0].visitCount + 1, urlExists.rows[0].id])
-
 
     if(urlExists.rowCount === 0) {
         return res.sendStatus(404);
     }
+
+    await connectionDB.query('UPDATE urls SET "visitCount"=$1 WHERE id = $2;', [urlExists.rows[0].visitCount + 1, urlExists.rows[0].id])
 
     res.locals.url = urlExists.rows[0];
     next();

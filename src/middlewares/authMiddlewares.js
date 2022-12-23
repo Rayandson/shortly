@@ -11,7 +11,7 @@ export async function validateSignUp ( req, res, next) {
 
     if (error) {
       const errors = error.details.map((detail) => detail.message);
-      return res.status(400).send({ errors });
+      return res.status(422).send({ errors });
     }
 
     try {
@@ -48,7 +48,7 @@ export async function validateSignIn(req, res, next) {
         const passwordIsOk = bcrypt.compareSync(user.password, isUser.rows[0].password)
 
         if(!passwordIsOk) {
-            return res.status(409).send("Senha incorreta")
+            return res.status(401).send("Senha incorreta")
         }
 
         delete isUser.rows[0].password;
