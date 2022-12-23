@@ -30,6 +30,6 @@ export async function signIn(req, res) {
         return res.status(200).send({...user, token:session.rows[0].token})
                
     } catch(err) {
-        res.status(500).send(err.message)
+        res.status(500).send(err.message) 
     }
 }

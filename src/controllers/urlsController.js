@@ -6,7 +6,7 @@ export async function create(req, res) {
     const { url } = req.body;
     const shortUrl = nanoid(8);
 
-    const userId = res.locals.userId;
+    const userId = res.locals.userId; 
     
     try {
 
